@@ -1,0 +1,153 @@
+Is there a way to backtest trades on a specific Day? For example trade 0DTE only on Mondays?
+
+Matt (Option Omega) — 03/17/2022 6:04 PM
+Yes there sure is!
+[6:04 PM]
+You can select daily/weekly/monthly
+[6:05 PM]
+One second let me post a screenshot
+
+Rodrigo C — 03/17/2022 6:05 PM
+ohh i see. So i should put it in weekly and starting on a Monday /Wed or Friday
+[6:05 PM]
+oh, there's an option to choose the day
+[6:05 PM]
+great!
+[6:05 PM]
+
+
+Matt (Option Omega) — 03/17/2022 6:06 PM
+Yes
+[6:06 PM]
+
+[6:06 PM]
+You got it
+
+Rodrigo C — 03/17/2022 6:06 PM
+amazing
+[6:06 PM]
+Thanks!
+
+3
+
+Matt (Option Omega) — 03/17/2022 6:07 PM
+Thank you @Rodrigo C for using the help channel for a help request!!! We're trying to organize the Discord a little clearer
+
+3
+March 18, 2022
+
+Emet — 03/18/2022 10:31 AM
+Hi - I'm probably just going blind, but where is the 'Misc' section to specify Open/Close fees?
+
+Rusty (Option Omega) — 03/18/2022 10:49 AM
+At the bottom of the "New Backtest" slider, beneath both entry and exit conditions
+
+Emet — 03/18/2022 10:52 AM
+Ah got it - caching issue
+[10:52 AM]
+You are doing super rapid releases... maybe slap a release date somewhere on the page?
+
+Rusty (Option Omega) — 03/18/2022 11:02 AM
+good call
+[11:02 AM]
+too many releases?  (edited)
+
+Emet — 03/18/2022 11:19 AM
+No, being this responsive to feedback is extremely impressive
+
+2
+
+DavLd — 03/18/2022 11:53 AM
+so maybe I'm missing something
+[11:53 AM]
+this is a web based app
+[11:53 AM]
+so wont we just see the latest version each time you update?
+
+Rusty (Option Omega) — 03/18/2022 11:56 AM
+Unless your browser caches excessively
+[11:56 AM]
+Or you never close your tabs
+
+Emet — 03/18/2022 11:58 AM
+Yea, I just had the same tabs sitting there from yesterday
+
+2
+March 24, 2022
+
+mar7fan — 03/24/2022 11:39 PM
+Regarding Profit Target and Stop Loss%
+
+It's % of premium/debit received/paid, correct?
+
+Stop loss % is net loss.  Say a credit trade receives $10 premium, stop loss set to 30%, when stop loss hit, the net loss will be $3.  Right?
+
+For credit trade, Max. profit is 100%, Max. stop loss can be a large number, correct?
+
+For debit trade, Max. profit can be a large number, Max. stop loss is 100%, correct?
+
+On credit trade test results, there are some very big profit or loss, much bigger than the profit target and stop loss %.  What's the reason for that?
+
+Thx.
+March 25, 2022
+
+DavLd — 03/25/2022 2:32 AM
+Yes to all of your questions. For the last question on large profit/loss it can be due to gaps due to the data being 5 minutes or more likely from trading day gaps at open
+
+1
+[2:33 AM]
+If you want simulate limit or stop orders that would catch these , toggle these on:
+
+March 28, 2022
+
+@DavLd
+Yes to all of your questions. For the last question on large profit/loss it can be due to gaps due to the data being 5 minutes or more likely from trading day gaps at open
+
+mar7fan — 03/28/2022 7:33 AM
+Setting the 2 toggles did the trick, thx
+April 1, 2022
+
+AndyM — 04/01/2022 7:59 AM
+Is there a way to backtest a combo trade?   I want to test a Put Credit Spread and a Butterfly Debit trade simultaneously?
+
+@AndyM
+Is there a way to backtest a combo trade? I want to test a Put Credit Spread and a Butterfly Debit trade simultaneously?
+
+Rusty (Option Omega) — 04/01/2022 8:09 AM
+Not currently. We are however working on a way to show the results of multiple strategies together
+
+AndyM — 04/01/2022 8:38 AM
+ok thx
+April 3, 2022
+
+Rodrigo C — 04/03/2022 5:38 PM
+Hello everyone. I have a super basic question.
+
+In options Omega market opens at 09.30 and closes at 16:00...but does that time changes due to daylight savings time? (edited)
+
+Rusty (Option Omega) — 04/03/2022 5:39 PM
+Yes, it follows eastern US time zone
+
+2
+April 5, 2022
+
+Simran — 04/05/2022 9:25 PM
+Quick question
+[9:27 PM]
+the backtest is based on the starting capital & not the available buying power. For example if I fund a margin account with 6K cash, my buying power will be actually be 18K (edited)
+[9:28 PM]
+so the results I am seeing in option omega is based on the cash and not the max buying power. Correct?
+
+@Simran
+the backtest is based on the starting capital & not the available buying power. For example if I fund a margin account with 6K cash, my buying power will be actually be 18K (edited)
+
+DavLd — 04/05/2022 9:50 PM
+https://podcasts.apple.com/us/podcast/the-trade-busters/id1576884492?i=1000531299939
+Apple Podcasts
+‎The Trade Busters: 18 – Stock Margin vs. Options Margin on Apple P...
+‎Show The Trade Busters, Ep 18 – Stock Margin vs. Options Margin - Aug 6, 2021
+
+[9:51 PM]
+If you fund 6k your max option margin is 6k
+[9:52 PM]
+The 18k (or more) would be stock buying power which is something different

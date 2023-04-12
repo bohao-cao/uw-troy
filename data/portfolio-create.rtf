@@ -1,0 +1,72 @@
+Creating a Portfolio
+What are Portfolios?
+Portfolios are an extremely powerful tool that allows the user to run multiple backtests dynamically over time.
+
+If you prefer a video summary, this may be helpful.
+
+Setting up a Portfolio
+In the web app, select the portfolio (circled) and click + New Portfolio (arrowed).
+
+
+This will bring up your main screen to create and manage the portfolio.
+
+
+You will at first see fewer options than the backtest creation screen.
+
+Starting funds and a date range are required to be selected. NOTE: the starting funds and date range for the portfolio will OVERRIDE the starting funds and date range for the saved tests (it won’t actually change the saved tests, but for the purposes of the portfolio, it will use the portfolio starting funds and date range).
+
+After selecting these two items, the fun part begins!
+
+You will see a list of the saved backtests — portfolios are built from saved backtests– so if you want to create one from scratch, you will need to save the backtests that you want to incorporate first. Note that there is a searchable field (for names) for users who have an abundance of backtests. You can also select tags to narrow down the tests, since many users like to run portfolios on a certain type of shared strategies.
+
+The allocation field is critical. Similar to the starting funds, the allocation for the portfolio will OVERRIDE whatever the individual test(s) have as an allocation.
+
+Importantly, the allocation does NOT have to add up to 100%. It can sometimes be more than 100% (depending on the length of tests, etc.). It may often be less than 100% as well.
+
+This video on portfolio allocation may be helpful.
+
+There is now also a choice to
+
+
+Max contracts can now be overridden when creating portfolios, similar to allocation percentage. If allocation and max contracts are both used and they are different amounts (and would normally be the case), whichever is smaller will be the decider.
+To add tests to the portfolio, simply select the check box. Once a test has been selected, it will be filled with an arrow, showing the test is a part of the portfolio.
+
+
+Once all the desired tests have been selected, it’s time to hit run, just like with a backtest.
+
+Portfolio results screen
+
+The portfolio results screen will display many of the same metrics that the backtest results screen does.
+
+Dates: The range the test ran.
+
+P/L: Shows the overall profit or loss of the strategy during the time range. Note: Portfolio P/L is net liquidity end of day (EOD); the trade log PnL is closed trades only.
+
+CAGR: The compound annual growth rate of the strategy during the test. CAGR is based upon net liquidity, so it involves open trades.
+
+Max Drawdown: The max drawdown at EOD. If a trade is open, then the EOD value is used for MDD calculations. If the trade closes, then the loss is used for MDD calculations. (Please note: This is different from the max loss column on the trade log, which  is intraday).
+
+MAR Ratio: CAGR / MDD
+
+Total Premium: The total amount of credit or debit.
+
+Capture rate: The % of the trade value that was realized.
+
+Starting capital: The amount of $ at the beginning of the backtest.
+
+Ending capital: The amount of $ and the end of the backtest.
+
+Portfolio results screen graphs
+
+The bottom of the portfolio screen displays two summary graphs. The one on the left graphs net liquidity vs the benchmark, and the one on the right graphs the performance and max drawdown of both the portfolio and the benchmark.
+
+The daily log and trade log columns both function similar to these columns in backtests. Strategies is unique to portfolios.
+
+
+Selecting strategies will provide a snapshot of which backtests were selected, including the details of the allocation in the portfolio.
+
+Sharing the portfolio
+Saving a portfolio is easy. It is a similar process to saving a backtest.
+
+
+Select the icon next to New Portfolio. This will bring up the Save Portfolio choices. The process works the same as with backtests, including tagging and sharing the portfolio with other OO users.

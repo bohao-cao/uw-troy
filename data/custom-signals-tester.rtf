@@ -1,0 +1,94 @@
+Custom Signals Tester
+“Heads-up”
+The CSV tester is an advanced option! We strongly recommend watching this video on it, before you do anything else!
+
+
+Unlocking the Advanced Options
+This feature is gated behind the advanced options toggle. To get to it, click on the portrait in the upper right hand corner of the app, as noted by the white arrow in the screen shot below.
+
+
+Then, click Preferences, and the toggle on “Show Advanced Options”.
+
+Then, PLEASE click “Update Preferences”
+
+
+Custom Signals Tester Basics
+The custom signals tester is a CSV upload option that replaces some of the standing backtesting options. It allows you to bring some amount of information into the tester, and backtest those user-generated signals.
+
+Common use cases include:
+
+Special indicators developed for certain combinations of market movements and/or timing
+Advanced TA situations
+Custom charting applications
+In real terms, this section allows the user to use their own data via a CSV upload and backtest it in order to tweak profitability, exit conditions, position sizing, etc. etc.
+
+It is considered an advanced feature, and because it requires a higher level of technical expertise, it not turned on by default.
+
+Before we get into the four different choices for the tester, let’s look at the maximum amount of information required.
+
+
+Above is a custom list of signals for SPY. When the correct procedure is followed (as detailed below– this is the final option when all three choices on the signals settings are selected), the user will be testing entry and exit times, along with a mixed strategy of buying and selling puts and calls at various strikes. This is the most complicated format, and simpler variations are available.
+
+The signals tester is extremely powerful– it allows deep testing of multiple intraday trades mixing and matching various strategies and situations. It is not for the faint of heart or new tester, but can provide optimization at a high level.
+
+Some basics:
+
+The formats must be followed exactly! This is essential. Improper formatting– including punctuation- will result in a lot of frustration and time wasting. In each section we’ve provided sample CSV files, where the data can be removed and customized per individual requirements. Some tools (including Excel), may open the provided CSV’s and default them to a different format. A settings change may be required (most typically to have the date in an ISO format).
+
+The OPEN_DATETIME and CLOSE_DATETIME columns must be exactly formatted. The requirement is an ISO formatted date, a space, and then 24 hour time format with hours and minutes only. Example: 2022-10-26 13:45
+
+The BUY_SELL column must be either a B or S.
+
+The CALL_PUT column must be either a C or P.
+
+The STRIKE must be numerical– please make sure this strike exists at this date and time!
+
+The EXPIRATION column must be an ISO formatted date. Example: 2022-10-26
+
+The QUANTITY must be a positive whole integer.
+
+CSV File Upload Settings
+This section is now unlocked and displayed the the very bottom of the backtest creation.
+
+
+Once you select the option to use it, you will then see two additional choices.
+
+
+The custom signals tester allows several different versions of data upload at file, at the user’s discretion.
+
+Testing entry times only
+The most basic use of the custom signals tester is for an entry time only. When the first option is selected, this allows the user to upload a CSV which specifies the date and time ONLY. The date and time MUST be in the below picture format.
+
+Click here for a sample .CSV file that can be used and modified.
+
+
+Please note– when using this option– ALL of the normal minimum selections that are required to run a backtester STILL need to be input, including ticker, strikes, etc.
+
+Testing entry and exit times
+
+When the first two options are selected, the custom signals tester will both entry AND exit times. This allows the user to upload a CSV which specifies the dates and times ONLY. The date and time MUST be in the below picture format.
+
+Click here for a sample .CSV file that can be used and modified.
+
+
+Please note– when using this option– ALL of the normal minimum selections that are required to run a backtester STILL need to be input, including ticker, strikes, etc.
+
+Testing Entry Times and Strikes
+
+When the first and third options are selected, the user can test the entry time, ticker, and strategy.
+
+The below information is required, and must be in the format exact detailed below.
+
+Click here for a sample .CSV file that can be used and modified.
+
+
+As in the above sections, ALL of the normal minimum selections that are required to run a backtester STILL need to be input, test date range, etc. etc.
+
+Testing Entry times, Exit times & Strikes
+
+When all three choices are selected, the user can test the entry time, exit time, and strikes. This choice requires the most amount of data in the .CSV file.
+
+The below information is required, and must be in the format exact detailed below.
+
+Click here for a sample .CSV file that can be used and modified.
+

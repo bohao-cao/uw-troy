@@ -1,0 +1,139 @@
+Can you give me basics of how you come up with the price? Is it mid?
+We get bid/ask from an OPRA data vendor. We use mid price when opening and closing trades, though you can add slippage to modify this value.
+
+We use 1-minute historical data.
+
+I’m more of a visual learner? Do you have any videos?
+Sure do! Check out our growing YouTube Library.
+
+I have a question about the tester that I can’t find an answer to?
+The easiest way is to search this website– but we have a huge library of answered questions on Discord– and the Discord search works pretty well. If you can’t get an answer there quickly– you can post in the “help-questions” channel on the Discord.
+
+I have a trade that looks very different when I test with qty 5 of each contract, rather than a qty 1 of each contract. Why?
+The difference is that your slippages, fees, etc. are applied to a single “tranche” of the trade. The second setup (default each qty to 1) is what you want; this is how the software was designed to work. The per-leg quantities are for butterflies, etc., where the leg quantities are uneven (1-2-1, PRIC, CRIC, etc.)
+
+My trade didn’t work…why not? (another version is this: My test worked but it doesn’t have a trade I think it should. Can you explain?)
+The most common reasons tests don’t work are the following:
+
+Not enough Margin to support the trade (typical mostly for selling puts & calls).
+The exact DTE button is selected, and there were not trades that fit that DTE.
+The padlock next to the strike legs is selected. This is the exact strike offset — it is padlocked by default but you can uncheck it. If it is left on (default), the trade will only execute if there is an option at that strike.
+
+I have a diagonal (or calendar) with different dates. What happens when the earlier date is reached?
+When one leg closes on this type of test (or any other test), the other legs will close as well.
+
+I have a stop loss (and/or profit target) on for $300… but it’s not hitting?
+You probably want $3.00, not $300.
+
+My test is constantly blowing by the stop-loss (or profit-target). Why is this?
+The backtester uses 1 minute data. At the interval in which data is measured, often the SL/PT will be “past” the exit value.
+
+If you prefer to have it stop on these values exactly, just select these choices under misc:
+
+
+These choices do exactly what they say– cap non opening (i.e. intraday) losses or profits at the the value specified.
+
+For example, if the price is 9.99 and your PT (or SL) is 10, the exit will not trigger. If the market moves and the price is 10.25, the PT (or SL) will trigger. If you have the profit (or loss) uncapped (default), it will show 10.25. If you have profits/losses capped (optionally, like above), the backtest will close at 10.
+
+I use a big, popular broker that people commonly abbreviate with 4 letters. I’ve noticed that my deltas are slightly different that OO? What is
+causing this?
+We get our deltas from a data vendor, and find them to be consistent with other brokers and tools. If you poke around the internet, we’ve been told you will find a lot of discussion per your particular question due to one certain broker’s display of deltas.
+
+I’m confused about trailing stops. Can you explain how they work?
+If you have a non-trailing stop of 100%, and a credit spread with initial credit of $2, then the stop would be $4 db.
+
+If the stop is then trailed at $1 profit target, and the current value if your trade is $1 (thus triggering the trailing stop condition), then the trailing stop will initially $2 db and then will continue to adjust as your trade increases in profit.
+
+A trailing stop will “follow” the price only upon profitable movement in trade’s price.
+
+Also,  the  trailing stops (and profit actions) use the current premium value to calculate the SL
+
+I want to find a 2 legged spread that’s about $2.50. How do I do this?
+The most common method to achieve this is a long and short leg, and use fixed premium for both. You can do this by manually adding un-linked legs. In this example we asked for a $3.50 short and $1, long and got this result on a 0 DTE SPX short spread.
+
+
+
+Additionally, you can use the min/max filter to get even more specific.
+
+There is a feature that people are talking about, but it’s not working in my app?? What is going on?
+We update the app frequently. A best practice for the app is to do a refresh of your browser whenever new features are added.
+
+How do I know when new features are added?
+We post them in the announcements channel on the Discord.
+
+I’ve got a two leg trade. How do I close just one side and let the other one run?
+When any leg is closed in OO, the whole trade closes.
+
+Some users use portfolio and break down trades into component pieces. Keep in mind that margin will work differently in this setup, but breaking a 4 legged trade down into a portfolio of 2- 2 legged trades (or any similar ratios), does allow a more granular level of control.
+
+This is great, but overwhelming… is there an easy way to get started.
+Yup! We recommend this video first, Option Omega 101. We then STRONGLY recommend joining the Discord community! It’s a wealth of knowledge.
+
+I have a feature suggestion. Where does it go?
+Great! We’d love to hear it. You can post under “feedback-suggestions” on the Discord!
+
+I’m noticing some unique behavior in a lot of my tests around March 2020. What’s going on?
+The Coronavirus global pandemic had a major impact on the market in 2020. During times of high volatility and rapid moves, many backtests will reflect this unique time. In addition to the normal suggestions (ignore wide bid-ask, two hits, etc. etc.), some people simply blackout the month or certain days if they want to ignore this time period.
+
+What’s your favorite trade?
+We’re a backtester– not a trade service— that being said, we have plenty of folks exchanging ideas freely on the Discord.
+
+Can I tranche out of tests?
+Yup. You can do this with profit actions. Here’s a great video on it.
+
+If you want to get even wilder, you can use portfolio to put on MULTIPLE trades that have multiple exits!
+
+Can I upgrade my subscription from monthly to annual?
+Yes, you can do this yourself in the app. Profile=>settings=>billing will get you to subscription management.
+
+I am backtesting using delta to find the strike– how does OO select the delta when the one I want isn’t available?
+The tester will find the closest delta, using decimal points if there is a “tie”.
+
+I have unchecked exact DTE. How does OO find the date I want? I’m trading really far out options.
+Exact DTE uses only the exact expiration; if that expiration isn’t found, the trade isn’t executed.
+
+If Exact DTE is toggled off, then the next available expiration further out in time is used; there is no limit to how far it will look
+
+I’m confused by the drawdowns stat and what it measures. Can you shed some more light?
+Sure– the max drawdown is per test, and thus, multi-trade. If a trade is open, then the EOD value is used for MDD calculations. If the trade closes, then the loss is used for MDD calculations. The max drawdown stat is EOD.
+
+Drawdown is based upon current net liquidity, which means that if those trades had already lost most of their value in the preceding days, then the backtest completing won’t necessarily have much affect on drawdown– it’s the same calculation for drawdown in both tests and portfolios
+
+In the trade log, it’s the maximum loss during the entire life of the trade as per our data resolution (1-min).
+
+The max loss column on the trade log is intraday.
+
+I trade iron condors. I want to only exit on side of the trade (put spread or call spread). How do I this?
+You can easily do this in portfolio. Just setup a put spread and a call spread and run them! You can get even more granular this way, and using a variety of the single leg choices that prompt closing a trade (i.e. you could use an option to close the spread once the short leg is exceeded by “x” points, etc. etc.)
+
+(It is on the request list to do this in the app WITHOUT using a portfolio. We have it on the suggestion list)
+
+Here’s a 90 second video on how to test a PCS and CCS as a condor using portfolio.
+
+Like the question above, I also trade iron condors. I do 0DTE. I’ve got a stop loss of 300% on this trade, and my losses blow by the stop. I realize that’s due to the gamma movement, but is there a way to NOT blow by the stops in the test?
+Sure, select “Cap Non-Opening Losses at Stop Loss” under misc features.
+
+On the Discord there are a bunch of abbreviations I don’t understand… can you help me?
+Here’s some common terms you may see in the OO Discord:
+
+BNB= Bed and Breakfast, a trade that is put on before end of day and taken off early the next morning (often a double calendar)
+
+CRIC= Call Ratio Iron Condor
+
+DC= Double Calendar
+
+DD= might be either a Double Diagonal OR DrawDown (see question above for a breakdown on the draw down discussion)
+
+EODIC= End of Day Iron Condor
+
+IC= Iron Condor
+
+HDIC= High Delta Iron Condor
+
+MEIC= Multiple Entry Iron Condor
+
+PDIC = Paint Dry Iron Condor (generally lower delta)
+
+PRIC= Put Ratio Iron Condor (I.E. more puts side spreads than call side spreads)
+
+RSS= Rolling Short Strangle
