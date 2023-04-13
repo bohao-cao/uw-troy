@@ -38,6 +38,8 @@ discord_token = os.getenv('DISCORD_TOKEN')
 discord_channel = 1095448067802673244
 
 
+
+
 #online_documentation = SimpleDirectoryReader('./data', recursive=True, exclude_hidden=True).load_data()
 online_documentation = SimpleDirectoryReader(input_files=['./data/announcements.rtf'], exclude_hidden=True).load_data()
 online_doc_index = create_faiss_index(online_documentation)

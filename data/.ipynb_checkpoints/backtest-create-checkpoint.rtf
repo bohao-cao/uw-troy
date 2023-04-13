@@ -1,0 +1,445 @@
+Your First Backtest
+To create a new backtest, hit the “New Backtest” button on your dashboard
+
+
+Tickers
+We offer backtesting in SPY, SPX, QQQ, and IWM
+
+
+Dates
+You can test as far back as 1/1/13 and as most recent as yesterday.
+
+Since the stock market (and our tester) is based off US New York Time (GMT-5), please be aware internationally of the date/time you select.
+
+
+We have some nice little bubbles with popular timeframes that will autopopulate for you
+
+
+If you notice on the “End Date” field, we have a little arrow. That will populate the last available trading day
+
+
+Building Your Strategy
+Under the “Strategy” section, we have a list of common strategies that you can choose from if you don’t want to create your own. Below is information about each one.
+
+Please note, all examples are from The Options Playbook and Tastytrade.
+
+Butterfly
+Calendar
+Double Calendar
+Iron Condor
+Iron Fly
+Jade Lizard
+Long Call
+Long Call Spread
+Long Put
+Long Put Spread
+Ratio Spread
+Short Call
+Short Call Spread
+Short Put
+Short Straddle
+Short Strangle
+Custom Strategy
+You can create a custom strategy by licking the the Add Leg option. You can add up to 8 legs for backtesting in one test.
+
+Strike Selection Type
+Please note, you can only choose one selection for all legs in the trade.
+
+
+By default, the option legs will be based on delta. However, there is also a % (OTM), a fixed premium, and a strike offset choice.
+
+
+Notice the delta symbol in the “type column” between the QTY and the DTE fields.
+You can also use Percentage OTM (Out of the Money)
+
+
+Notice the percentage symbol in the “type column” between the QTY and the DTE fields.
+You can also use Fixed Premium
+
+
+Notice the dollar symbol in the “type column” between the QTY and the DTE fields.
+You can also use Strike Offset– if you select this– it will open up additional choices.
+
+
+Option Legs
+What is an option leg? At the end of the day, a leg is made up of type (put or call), direction (buy or sell), and days to expiration (DTE)
+
+You can choose the type (put or call)
+
+
+
+Also the action (buy or sell)
+
+
+
+quantity (qty) of each leg
+
+
+Linked Legs
+There are some strategies that require different things. For instance, when you are selling a put spread that is 10-wide, you will need to know what the short leg’s strike is before you can buy a leg 10 points away. Another example would be if you are buying a calendar. You will need to know what the short strike is for the front month before you can purchase the long strike for the back month. To solve this, Option Omega uses the concept of “Linked Legs”.
+
+In order to link a leg, we will use this magical button here:
+
+
+When you click that button you will see that the button highlights and a new leg drops down underneath.
+
+
+Notice on the bottom leg that the spot where your selection type goes looks different than the one above.
+
+
+We default this to 0 for you. That means that as it currently stands, the bottom leg will be the same strike price as the top leg. This is useful for time spreads where you have different option legs with different days to expiration. For example, a common long calendar strategy:
+
+
+Let’s say we wanted to sell a 25 delta put spread and we wanted the spread to be 10 points wide. How would we go about setting that up?
+
+
+The top leg shows us selling a 25 delta put and the bottom leg has an offset of -10. It is important to remember that negative values in the offset mean down the option chain.
+
+How about if we wanted to sell a 25 delta call spread and we wanted the spread to be 50 points wide. How would we go about setting that up?
+
+
+The top leg shows us selling a 25 delta call and the bottom leg has an offset of +50. It is important to remember that positive values in the offset mean up the option chain.
+
+Let’s say you want to use two delta variables to test a strategy instead of two using linked legs. Just unlink the legs and select the deltas you want.
+
+Round Strikes
+Strikes can be rounded to the nearest multiple. – This should be used to target higher liquidity strikes (e.g., xx00/25/50/75 on SPX, or whole numbers on SPY)
+
+
+
+Exact Strike Offset– Padlocked Legs
+The padlock next to the strike legs is on by default. You can click it to turn it off.
+
+In the default mode (on), the trade will only execute if there is an option at the strike.
+
+If the box is turned off (white, unlocked), then the tester will find the nearest strike by absolute value.
+
+
+Entry Conditions
+Entry conditions allow you to run a backtest only when certain conditions are met.
+
+Entry Time
+
+
+please note: The available entry times are between 9:32am and 3:59pm EST. This is for “market time” (i.e. New York time in the USA). International users may have to adjust their clocks accordingly. Browser or system settings may impact this.
+
+
+Frequency
+
+How often do you run your backtest is one of the most important questions you will need to think through when setting up your strategy.
+
+Before diving into the frequencies available to run your backtests, we need explain a very simple but very important toggle:
+
+Use Exact DTE
+
+
+This little button says that we want to run our strategy ONLY when there is an option contract that has our EXACT DTE. What does this mean?
+
+Let’s look at a calendar strategy as an example.
+
+
+If you have the “Use Exact DTE” button toggled, this test will only run IF there is BOTH a 15 DTE AND a 20 DTE available. Not 14 and 19. Not 16 and 21. ONLY a 15 DTE and a 20 DTE. Storing this knowledge in your heart will save you a ton of time in the long run.
+
+With that being said, let’s move now to frequency types.
+
+Daily
+
+
+If you choose daily, Option Omega will run this strategy every day that you:
+
+Have the funds available to run it (more on this later)
+Have not exceeded the “max open trades” threshold that you set (more on this later)
+Weekly
+
+
+If you choose weekly, Option Omega will run this strategy every weekday (that you select) where you:
+
+Have the funds available to run it (more on this later)
+Have not exceeded the “max open trades” threshold that you set (more on this later)
+Monthly
+
+
+If you choose weekly, Option Omega will run this strategy every day of the month (that you select) where you:
+
+Have the funds available to run it (more on this later)
+Have not exceeded the “max open trades” threshold that you set (more on this later)
+Specific Dates
+
+
+Specific dates allows you to choose a whitelist of dates that you want to trade.
+
+Format is the same as blackout dates (i.e. Please use a list of comma-separated ISO-formatted dates! E.g.: 2022-05-25,2022-04-21).
+
+All other conditions (VIX filters, TA, date range, etc.) still apply.
+
+This video may be helpful regarding the whitelist/blackout days features.
+
+Use Floating Entry Time
+
+As an alternate to a mechanical, timed trade, you can now choose to open a trade whenever entry conditions are met, e.g. intraday movement, regardless of the specific time. Toggle “Use Floating Entry Time” and optionally specify min and max entry times.
+
+You must still specify a “range” of times during a day to use floating entry.
+
+Note– this only “works” with certain entry triggers, such as underlying point move.
+
+Starting Funds
+
+This is the amount of money you want to start the test with. It will obviously change as your p/l changes.
+
+Margin Allocation % Per Trade
+
+This is the percentage of your starting funds that you want to use for each test. Let’s think through a couple of examples.
+
+Let’s say you want to sell a call credit spread 5 points out. Assuming you are starting with over 1k in funds, you should be able to run through a couple of trades in the test before you were ever in danger of running out of funds.
+
+Now, let’s say you wanted to sell a naked call with your starting funds at 1k. Would this run? No it would not. Why? Because naked options require more margin than spreads.
+
+Quite often, we get asked why the number of contracts per trade seem to increase or decrease through the life of the trade. The reason is that Option Omega is dynamically running your strategy using the starting funds and the margin allocation % that you put in place. When in doubt, check these fields.
+
+Please note: While we have made every effort to have accurate and realistic margin modeling, margin requirements vary between brokerages, and not all trades are supported.
+
+Max Open Trades
+
+This is the amount of trades you want to have on at any one time through the life of the test.
+
+Let’s say you are selling a put credit spread 120 days out and you are doing it everyday that you have the capital available to place the trade. If you start with a million dollars and you are allocating 2% of your margin allocation, you theoretically could have hundreds of trades on your book. This option allows you to put in place a limit on how many trades you can have on at any given time. With this you are basically saying that no matter how much money and how high an allocation I am using, never have open more than x-number of trades at any given time.
+
+You may notice that little toggle to the right that says, “Prune Oldest Trades”. If you want to have x-number of trades on but you want to continue the strategy, you can toggle this on. What it will do is close the oldest trade on your books before opening a new one.
+
+Max Contracts per Trade
+
+If you would like to bypass all of the allocation work that is done through Option Omega, than you can simply put 1 in this field. That way, we will ever only use one contract per trade, no matter how much your allocation % is or what your starting funds are.
+
+Another scenario where this comes in handy is if your strategy is hugely successfull over time! Let’s imagine a strategy that won 99.9% of the time while suffering only a 1% drawdown (If you find this please email us immediately!). If you are starting with 10k in funds and allocating 100% to this strategy, you would quickly be putting on thousands of contracts at one time. To be more realistic, you might want to limit the number of contracts to a reasonable representation of what you think you could get filled on.
+
+Use VIX
+
+You can set a minimum or maximum VIX level as an entry condition. For instance, you are buying a double calendar but you only want to do it in environments where the VIX is under 20. Another example would be you are selling a put credit spread but you only want to enter if the VIX is over 40.
+
+Use VIX overnight move
+
+VIX overnight movement can now be used as an entry condition, similar to gaps. – Note: Overnight movement is defined as the 4:15 PM VIX price vs VIX price at market open (9:30, though VIX is sometimes delayed to 9:31-9:33).
+
+VIX9D/VIX Ratio
+VIX9D / VIX ratio is also available as both entry and exit conditions. This ratio is useful for trading when short-term volatility is especially high or low. Toggle “Use VIX” to enable these filters.
+
+
+Use Technical Indicators
+
+RSI and SMA are calculated at 1 minute intervals. RSI is calculated using 14-day length and simple smoothing.
+
+RSI
+
+The Relative Strength Index (RSI), developed by J. Welles Wilder, is a momentum oscillator that measures the speed and change of price movements. The RSI oscillates between zero and 100. Traditionally the RSI is considered overbought when above 70 and oversold when below 30.
+
+SMA
+Simple moving averages calculate the average of a range of prices by the number of periods within that range.
+
+Use Gaps
+Please note: Use positive numbers for all values. Values should be in percentages. Using Gaps (YouTube Link)
+
+If you want to trade when the market moves a certain amount up or down, you can enter values into both “min” fields, as shown below, and the condition will trigger when either are true.*
+
+This will enable to you open trades when the market either moves a minimum amount up or down, or conversely under a certain amount, from the previous close to the open of the current day (or a combination of the two).
+
+Use Intraday movement
+
+Only trade when the underlying price moves a certain amount from open of day to entry time. Note: movement can be specified in either percent or points
+
+Use SqueezeMetrics™ (Gamma / Dark Pool) Indicators
+
+SqueezeMetrics provides open access to end-of-day DIX, GEX, and GXV values. Please see SqueezeMetrics for more information.
+
+Min DIX/Max DIX
+Dark Index (percentage). “Relative amount of trade volume marked ‘short’ in off-exchange (dark) trading.” DIX Video (YouTube Link)
+
+Min GEX/Max GEX
+Market Makers’ Gamma Exposure (billions $)
+
+Min GEX/Max GXV
+Gamma Volatility; “1-day volatility historically associated with the given level of GEX”
+
+*Please note: A historical low of GXV would be around a 6. A historical high GXV would be above 30 *
+
+Exit Conditions
+Profit Target
+
+When testing a strategy, you can set a profit target using three different methods:
+
+
+Percentage
+Let’s say you have a put credit spread you are selling. You want to close the trade when the spread has lost 10% of its value.
+Perhaps you have a put debit spread that you bought. You want to close the trade when the spread has gained 10% of its value.
+Fixed Profit
+If you buy $1 calls and want to make $5 profit, then enter 5 for the profit target
+Closing Order
+You want to set a closing order at a certain price and get out when that price is filled.
+Stop Loss
+
+You can also set a stop loss using the same three methods
+
+Percentage
+Let’s say you have a put credit spread you are selling. You want to close the trade when the spread has gained 10% of its value.
+Perhaps you have a put debit spread that you bought. You want to close the trade when the spread has lost 10% of its value.
+Fixed Profit
+If you buy $1 calls and want to lose $4 max, then enter 4 for the stop loss
+Closing Order
+You want to set a closing order at a certain price and get out when that price is filled.
+
+Here’s more detail on the profit targets: Profit Targets (YouTube Link)
+
+Per-Leg Stop Loss
+In order for the per-leg stop loss choice to appear, you first need to enter a value into the stop loss field.
+
+This option will cause the trade to be closed on stop loss, based on an individual selected leg– not the whole spread.
+
+Note: This is a niche option, and should only be used if you have a specific use case. It is off by default.
+
+
+Use Profit Actions
+
+Profit actions allows you to scale out of a percentage of each trade at certain profit targets, adjust your stop loss, or both!
+
+Any remaining allocation will fall back to the main PT/SL parameters (if specified) and/or remaining exit conditions.
+The trade log will show each time a partial profit is taken as well as the quantity closed
+This video on profit actions may be useful.
+
+Use Early Exit
+
+This toggle is used for when you want to exit the trade before expiration.
+
+Early Exit Date
+
+Using DTE
+Let’s say you have a 45 DTE put spread. You can use this to say you would like to exit at a certain number of days before expiration.
+
+Using DIT
+Let’s say you have a 45 DTE put spread. You can use this to say you would like to exit once you have been in the trade a certain number of days.
+
+Early Exit Time
+You can also specify the time you would like to get out. please note: in order to use the time, you must have an early exit date set
+
+Use Technical Indicators
+
+As is with entry conditions, you can also exit the trade when certain technical indicators are set. Please see “Entry Conditions” for more detail.
+
+Exit When OTM Short Put/Call is touched (or approached) aka “Exit When Tested”
+You can also exit when the out of the money short is touched on your trade. Let’s say you are selling a put credit spread. You can choose to exit when the short in that spread is touched. You can also specify how many points before or after it is touched that you want to exit.
+
+
+*please note: This is typically only useful for non-ATM trades.
+
+Exit When Underlying Price Moves
+
+Trades will be closed when the underlying price moves up or down the specified amount- use positive numbers.
+
+Misc
+This section has been affectionately called “the pain zone”– toggles meant to make your test as realistic as possible in as many ways as possible.
+
+This video may be helpful, as many of the features are covered in it.
+
+Use Commissions & Fees
+
+If you know ahead of your time what your per-contract fees and commissions are, you can put them here and we will account for those costs in your test.
+
+Here’s a real quick on fees, and you can also watch the video linked just above and here (the deep dive).
+
+
+Use Slippage
+
+Slippage can be optionally added to entry, exit or both. This price affects the chosen parameter by the amount listed. This can be especially useful on high/low delta and lower liquidity strikes.
+
+Note: Slippage is per position. Thus, if you have an Iron Condor, a .10 slippage would be per all 4 legs
+
+More details on slippage can be found here: Slippage Video (YouTube Link)
+
+
+If you enable a stop loss, the option for Stop Loss Slippage will appear, allowing you to customize this for stopped exits.
+
+
+Ignore Trades with Wide-Bid Ask Spread
+
+There are times when the market gets wonky (Covid Crash, Volmageddan, etc). If you toggle this, we will ignore trades where the bid/ask widened over 10k basis points (100%). This is also useful for deep ITM/OTM strikes.
+
+
+Close Open Trades on Test Completion
+
+Let’s say you sell a 90 DTE put spread every day. This test runs from January 1st to January 31st. Presuming you had enough capital, at the end of January 31st, you might have over 30 trades still on.
+
+Toggling this tells Option Omega to close those trades win, lose, or draw when the test date ends.
+
+
+Cap Non-Opening Profits at Profit Target
+
+We cannot pretend overnight gaps won’t affect your trade (nor should we). But what we can do is assume that the profit you received (besides an overnight gap) was as good as you got.
+
+Here’s a real quick on it.
+
+
+Cap Non-Opening Losses at Stop Loss
+
+We cannot pretend overnight gaps won’t affect your trade (nor should we). But what we can do is assume that the loss you received (besides an overnight gap) was as bad as it got.
+
+
+Require Two Consecutive Hits at Profit Target
+
+One of the chief ways you can strengthen the rigidity of your tests is to make sure you are getting accurate fills.
+
+When this toggle is on we will only exit trades when the max profit is hit for two consecutive time intervals. The trade still exits at the first time interval and price, however.
+
+
+Require Two Consecutive Hits at Stop Loss
+
+When this toggle is on we will only exit trades when the stop loss is hit for two consecutive time intervals. The trade still exits at the first time interval and price, however.
+
+More detail here: Require Two Hits (YouTube Link)
+
+
+
+Use Min/Max Entry Premium
+
+Filter trades that open for premium between these values. Use positive numbers for both values, regardless of whether the strategy is a credit or a debit.
+
+
+Use Short/Long Ratio
+
+Filter trades that open short/long ratio between these values. The ratio is the total short premium divided by the total long premium.
+
+
+Use Blackout Days
+
+Sometimes the strategy you want to create requires uniform pricing upon entry. This toggle allows you to limit new trades to ONLY the credit(debit) you want to receive(pay).
+
+
+Maybe you have been trading awhile and know that there are certain dates in history that you know you would not have traded.
+
+This allows you to enter a list of dates that will be ignored when the tester attempts to enter new trades.
+
+Please use a list of comma-separated ISO-formatted dates! E.g.: 2022-05-25,2022-04-21
+
+Here’s a real quick video on specific dates.
+
+Re-Enter Trades After Exit
+
+This feature will allow you to automatically re-enter a trade after specified exit conditions are triggered (stop loss, short tested, etc). You can optionally add a delay before re-entry, as well as a minimum and maximum time of day (most useful for 0 DTE). * Note: the re-entered trade will use the same entry criteria (deltas, widths, DTEs, entry conditions) as the original trade.
+
+Here’s a video on trade re-entry.
+
+
+Save and share a backtest
+
+If you select the down arrow next to the New Backtest button, you will have the ability to save (and share) a backtest.
+
+
+Shared tests are read-only for others, but will allow others to re-run or save their own copies of said tests. Shared tests are “live”, so when you update the original test, others will see the changes.
+
+You can create a new backtest, or replace an existing backtest.
+
+
+Share tests by toggling the option in the “save/edit” backtest slider * The “link” icon will copy the shared URL to your clipboard
+
+Here’s a video on saving & sharing a backtest.
+
+Recent Test Runs
+
+If you select the clock next to the share backtest button, you will see the recent test run cards- Useful for those who iterate rapidly! After running a test, you should see a clock icon in the test header that will open a slider with a list of recent test runs. Selecting a test from the slider will load all details from that test, including the trade log. The 25 most-recent test runs per session are stored.

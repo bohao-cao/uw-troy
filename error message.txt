@@ -1,0 +1,23 @@
+Faiss index is not able to give exact answers:
+for example: 
+what intervalls the back testing uses and for how far back is there data?
+bot answer:
+The back testing uses the intervals specified by the user, and the data available for back testing goes back as far as the user has specified, allowing for a comprehensive analysis of the performance of the strategy over a given period of time.
+GCAnswer: 
+The back testing typically uses 1-minute intervals and has data going back to 2013.
+
+
+The on_thread_create encountered the error below.
+
+thread:New thread content
+2023-04-12 02:32:17 ERROR    discord.client Ignoring exception in on_thread_create
+Traceback (most recent call last):
+  File "/opt/conda/envs/python38/lib/python3.8/site-packages/discord/client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "optimized.py", line 35, in on_thread_create
+    message = await thread.fetch_message(thread.id)
+  File "/opt/conda/envs/python38/lib/python3.8/site-packages/discord/abc.py", line 1624, in fetch_message
+    data = await self._state.http.get_message(channel.id, id)
+  File "/opt/conda/envs/python38/lib/python3.8/site-packages/discord/http.py", line 740, in request
+    raise NotFound(response, data)
+discord.errors.NotFound: 404 Not Found (error code: 10008): Unknown Message

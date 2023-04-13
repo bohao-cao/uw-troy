@@ -1,0 +1,126 @@
+[
+  {
+    "question": "Just wondering what intervalls the back testing uses and for how far back is there data?",
+    "answer": "1 min - going back to 2013"
+  },
+  {
+    "question": "Can you tell me why there are so few trades in my test?\ni was expecting several hundred?",
+    "answer": "Always best to start a backtest without any constraints (e.g. VIX), and then gradually refine. There were long periods of time when VIX was less than 20.\n\nAlways best to start a backtest over a shorter duration (it's quicker, if nothing else!) and then build from there.\n\nFor selling naked puts (even on SPY) always best to start with a silly amount of capital, to ensure you don't accidentally run out of margin.\n\nFor longer duration trades, they won't show up in the test results, unless you toggle 'close open trades on test completion'.But more generally; if you start 'simple' and build complexity, you'll have a better idea as to what setting you changed, which caused the backtest to give 'unexpected' results."
+  },
+  {
+    "question": "When entering a fixed premium for a Short Put Spread with for example $0.5 for the short and $0.1 for the long I see in the trade log that OO is taking premiums that are over $0.5 for the short. Even trades with $0.6 and $0.7 which should not happen. Is there a function to tell OO that $0.5 is the MAX premium and should not go higher than this and only look for lower premiums instead?",
+    "answer": "Would something like a 'max. credit' filter work?\n\nNote - some potential trades will be filtered out, as the nearest available strikes to 50 cents might be 30 cents and 65 cents, in which case the 65 would be chosen for the candidate trade.\n\nThe OO selection is for the 'nearest strike'. There aren't options to choose (instead) 'next strike below' or 'next strike above' (and if there were, that would make the interface a lot more complicated!) \n"
+  },
+  {
+    "question": "As the title says I get pretty big differences when backtesting 0DTE strategies and using \"Require Two Consecutive Hits at Stop Loss\". In one instance the p/l almost doubled.\n\nCan someone explain exactly why the difference is so big?\n\nAlso while I'm asking does anyone know if this is similar to using a double bid/ask order for the Stop (at least that's what IBKR calls it)?",
+    "answer": "It's not the same as IBKR's double bid.\n\nSome positions will have spready prices, and NBBO and mid could fluctuate wildly during opening, and in other times of high volatility.\n\nA cautious approach is not to use OO double tap (two sequential minute closes) for SLs.\n\nIf you are trading longer-expiry trades, and would manually exit (not with a SL order) when price reaches your limit zone, it may be appropriate. It will very much depend on the particular backtest, your approach to trading, etc."
+  },
+  {
+    "question": "Any workaround to put on a trade every other week?",
+    "answer": "Easy workaround...\n\nTest A. Enter every first Monday\nTest B. Enter every third Monday\nCombine in Portfolio\nVoilà!"
+  },
+  {
+    "question": "The strike selections is completely wrong and I see this happening on other dates as well. How can I fix that?",
+    "answer": "If you choose 'Current Price' does it gives strikes more in line with that which you'd expect?"
+  },
+  {
+    "question": "I am working on a test and trying to account for the mark having to be 10 cents past my limit to close. Let's say my profit target is 50 cents but the price has to go 10 cents below that to a actually fill. Do I set my profit target at 0.60 and then put 0.10 exit slippage or so I put my target at 0.50 with 0.10 slippage? I am looking for 0.50 in my pocket at the end of the trade.",
+    "answer": "If you want .50 at the end you want 0.60 with 0.10 slippage."
+  },
+  {
+    "question": "Would anyone let me know why a 100% win rate test has a negative CAGR?",
+    "answer": "If you turn on - close open trades on test completion - it might show a losing trade that has not closed yet"
+  },
+  {
+    "question": "if i has trailing stop from the beginning, and adjusting it from initial 2 to 1 after PT1, is this new SL of 1.00 also trailing or not?",
+    "answer": "Yes, it should trail the adjusted stop"
+  },
+  {
+    "question": "The trades executed for 30- and 90 days time frames are different. Is that normal?  If I do a 30 days time frame, I get 4 trades executed with 1 losing trade.  If I use 90 days, I get 6 trades executed with 0 losing trades.  Also, 90 days make 2 more trades in the last 30 days than the 30 days time frame.  Please can you clarify why trades over the same period in different timeframes don't correspond?",
+    "answer": "Run the backtest:\n(a) with 1 contract (so that it enters 'whenever it can', rather than only 'if it has spare capital'\n(b) use the 'close open trades on test completion' toggle, to understand where you might be at current date\n\nThis will probably give you a better insight into the trade ..."
+  },
+  {
+    "question": "Hi all. I am trying to figure out the difference in adding \"Leg quantity\" in the \"Legs\" section, vs keeping it at 1 and adding max contracts per trade. Looking at an iron condor, It shows very different results with adding 4 legs (in the \"legs section), vs 1 leg but 4 contracts. I don't understand, are they not the same trade set up in reality?",
+    "answer": "Hey there! The difference is that your slippages, fees, etc are applied to a single \"tranche\" of the trade. Your trailing stops and closing orders are also based per tranche\nlook at the premium and closing cost columns in the trade log and compare those to your PT/SL\nThe second setup is what you want; this is how the software was designed to work\nThe per-leg quantities are for butterflies, etc., where the leg quantities are uneven (1-2-1, etc)."
+  },
+  {
+    "question": "Is there an easy way to exclude or specify FOMC days only in OO?",
+    "answer": "Yes, very easily-- just use specific dates to blacklist those \nYou can exclude whatever dates you want\nOr limit to testing ONLY on days you want\nHere's a one minute video on specific dates: https://optionomegadocs.com/wp-content/uploads/2023/02/Real-Quick-Whitelist-Blackout-Dates.mp4\nLonger form video on specific dates: https://youtu.be/tq_lG7qlUlc\nImage\nThat's from the Resources page https://optionomegadocs.com/?docs=docly-documentation/getting-started/creating-a-backtest"
+  },
+  {
+    "question": "How accurate are test done with purchase within 5 minutes of open and closing?",
+    "answer": "We give you NBBO mid price at the beginning over every 1-min interval\nIf you're running trades in only the last 2 minutes of the day, you're probably not going to get a reasonable result (e.g., open at 3:58 close at 4:00) "
+  },
+  {
+    "question": "Does the \"Funds by Date\" graph represent EOD liquidity just like max drawdown?",
+    "answer": "For backtests, it's based on closed trades only. For Portfolio its daily NAV.\n\nSo for a decent backtest equity curve, you just need to run a portfolio with one backtest in it"
+  },
+  {
+    "question": "How does the \"Use Min/Max Entry Premium\" feature work?",
+    "answer": "If I sell a 30 delta 75 wide 0 DTE credit spread at 09:35, but only want to do so if I'm being paid 8.00 or more for my trouble, then I'd put '8.00' as the minimum credit."
+  },
+  {
+    "question": "Can i start with fixed dollar stop loss and continue with profit actions based on %?\nif i change initial SL to %, then profit actions change to % as well",
+    "answer": "Errr nope, that's not supported.\n\nAnd if it was, it would probably create great confusion for a number of users."
+  },
+  {
+    "question": "How do I setup a OO back test, where I can get out of a trade based on  % Delta move?  For example I have a 30 Delta Short leg, if the Delta changes to 36 (20% up) or 24 (20% down) I like to get out.",
+    "answer": "We do not currently have delta exits"
+  },
+  {
+    "question": "Hi. I need some help with Stop Loss in \"Use Profit Actions\"\nI Have IF and Initial stop = $3 (as example)\nI want to move the stop:\nto -$1 as soon as I get 10% \"At Profit Target\"\nto $0 as soon as I get 20% \"At Profit Target\"\nto $1 as soon as I get 30% \"At Profit Target\"\n\nSo what values should I put to \"Adjust Stop Loss To\"",
+    "answer": "You can't, insofar that you're 'mixing' % and $.\n\nThe Profit Action Stop Loss is 'relative to current (triggering) price', but if the profit is 10%, who knows whether that's 2$, or 5$ - so it's not possible to know where the SL should now be.\n\nYou might want to consider:\n- PT 2$, SL to 3$\n- PT 4$, SL to 4$\n- PT 6$, SL to 5$\n... or somesuch"
+  },
+  {
+    "question": "Is my assumption correct that the RSI used in the backtest is the 14 day (as mentioned in the documentation) and the last value (day 14) is the minute resolution of the current day?",
+    "answer": "This is correct"
+  },
+  {
+    "question": "When I click on the left pane of the 'New Backtest' form it moves out and you lose the backtest you are building!  I did not understand why it does not preserve the form being filled out!  Any ideas on how to make sure I don't lose my entries I made till I pressed on the wrong side of the window?",
+    "answer": "I don't think it's broken (such that it needs to be fixed). I think most new users do this (once). Once you have a saved backtest, then that will always be there (as a starting point) if your computer crashes, or if you click 'off focus' (again)"
+  },
+  {
+    "question": "How do I find recorded Cigar Lounge videos?",
+    "answer": "You can find all of our cigar lounge videos here https://www.youtube.com/watch?v=wxLJ5DmArf4&list=PLTOq6Tx9HnXIfSIOlvTqzZu9o-7hFl6EK&ab_channel=OptionOmega"
+  },
+  {
+    "question": "Does the backtest stop function use the one minute candle and the entire range as the parameter or does it use the spot price right at zero seconds on the minute?\n\nWondering if a wick on a one minute candle will stop the backtest.",
+    "answer": "Stop uses the prices at the beginning of each 1-min bar / candle."
+  },
+  {
+    "question": "Who are you?",
+    "answer": "I am Matt Bot and I am here to help any questions you might have about OO. I am still learning though, so please be patient with me!"
+  },
+  {
+    "question": "I can't find a reason why this date is missing.",
+    "answer": "It could be a couple of things: Not enough Margin to support the trade (typical mostly for selling puts & calls).\nThe exact DTE button is selected, and there were not trades that fit that DTE.\nThe padlock next to the strike legs is selected. This is the exact strike offset — it is padlocked by default but you can uncheck it. If it is left on (default), the trade will only execute if there is an option at that strike."
+  },
+  {
+    "question": "What's the difference between \"per trade\" and \"per lot?\"",
+    "answer": "Per lot = a single quantity of your trade with the quantity of each contract = leg quantity of the strategy setup\nA trade could have 1000 lots, depending on your settings for max contracts and allocation percentage\nPer lot is the average/min/max as if you ran your trade with max contracts = 1"
+  },
+  {
+    "question": "is it possible to choose the exact Price of long Options in the Double Diagonal spread? Actually i only can find the Option to enter the spread width in Points not Credit/Debit.",
+    "answer": "you can’t specify the “exact” price—- but you can get really close with fixes premium, and the. Use mix/max to drill down further"
+  },
+  {
+    "question": "What tickers can I test?",
+    "answer": "You can test SPX, SPY, IWM, QQQ"
+  },
+  {
+    "question": "Trying to test an iron condor strategy that would stop out when one side price is at 110% of the ENTIRE sale premium.  E.g. Sell IC for $2, stop out if call side or put side reaches $2.10.  Is there a way to do this?",
+    "answer": "In that case OO does not do this directly, you can approximate it by setting up two trades, one for the put spread and one for the credit spread and then run them together in a portfolio."
+  },
+  {
+    "question": "How do I test a strategy with trades every other week? I can only figure out daily, weekly and monthly.",
+    "answer": "Enter every first Monday and every third Monday into the backtest, and then combine the results in a portfolio to get the desired result."
+  },
+  {
+    "question": "Is there a way to select strikes for the fly wings based on a % away from the short strike? i.e. Tests from 10 years ago would have different results for a 70 point width for SPX vs today. SPX was trading at a lower level back then. Further, is there a way to make sure the widths are equal so it is not a broken wing if I was to use something like delta.",
+    "answer": "Best approach, run 4 different backtests..\nA. 2013-2015. 20 offset 10 wide\nB. 2014-2017, 30 offset, 15 wide\netc.\nCombine in Portfolio\n\nNote that butterflies from 10 years ago will behave very different to butterflies these days"
+  },
+  {
+    "question": "Is there a way to select strikes for the fly wings based on a % away from the short strike? i.e. Tests from 10 years ago would have different results for a 70 point width for SPX vs today. SPX was trading at a lower level back then. Further, is there a way to make sure the widths are equal so it is not a broken wing if I was to use something like delta.",
+    "answer": "Best approach, run 4 different backtests..\nA. 2013-2015. 20 offset 10 wide\nB. 2014-2017, 30 offset, 15 wide\netc.\nCombine in Portfolio\n\nNote that butterflies from 10 years ago will behave very different to butterflies these days"
+  }
+]
